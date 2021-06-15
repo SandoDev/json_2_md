@@ -1,5 +1,6 @@
 import re
 import json
+from models import TestModel
 """
 Datatypes json
 
@@ -46,19 +47,34 @@ def format_value(value, len_head=1):
     return final_str
 
 
-def main(file_name_input, file_name_output):
+def form_json_model():
+    schema_json = TestModel.schema_json()
+    name_file_output = 'test_files/' + TestModel.__name__ + '.json'
+    output_file_json = open(name_file_output, "w")
+    output_file_json.write(schema_json)
+    output_file_json.close()
+    return name_file_output
+
+
+def run_conversion(file_name_input, file_name_output):
     dict_json = get_data_json(file_name_input)
     output_file_md = open(file_name_output, "w")
+    output_file_md.write("# " + output_file_md.name + '\n')
     for key, value in dict_json.items():
-        output_file_md.write("# " + key + '\n')
-        output_file_md.write(format_value(value))
+        output_file_md.write("## " + key + '\n')
+        output_file_md.write(format_value(value, len_head=2))
         output_file_md.write('\n')
     output_file_md.close()
 
 
+def main():
+    # step 1
+    file_name_input = form_json_model()
+
+    # step 2
+    file_name_output = "docs/test_page.md"
+    run_conversion(file_name_input, file_name_output)
+
+
 if __name__ == "__main__":
-    file_name_input = "test_files/openapi.json"
-    #file_name_input = "test_files/example.json"
-    file_name_output = "test_files/output_open.md"
-    #file_name_output = "test_files/output.md"
-    main(file_name_input, file_name_output)
+    main()
