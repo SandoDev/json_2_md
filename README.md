@@ -18,11 +18,16 @@ la idea de esto es construir un modelo con pydantic y convertirlo a docs de mkdo
 
     pip install -r requirements.txt
 
-4. Puts in the folder `test_files`
+4. Run mkdocs
 
-    the names of the input_file (.json) and output_file (.md)
+    mkdocs serve -a localhost:8005
 
 5. Run project
+   1. Modify the `models.py` [Optional]
+   2. run in console
+        
+        python main.py
 
-    python main.py
+6. Visualizate in
 
+    http://localhost:8005/test_page/
