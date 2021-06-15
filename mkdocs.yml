@@ -1,0 +1,8 @@
+site_name: Json2MD
+site_url: https://example.com/
+
+nav:
+  - Home: index.md
+  - Test page: test_page.md
+
+theme: readthedocs
